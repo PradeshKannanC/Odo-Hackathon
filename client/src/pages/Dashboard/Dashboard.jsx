@@ -1,7 +1,15 @@
 import { useCallback, useEffect, useState } from "react";
 import dashboardService from "../../services/dashboardService";
 import { useToast } from "../../hooks/useToast";
-import { Table, Badge, SkeletonCard, SkeletonTable, ErrorState } from "../../components/common";
+import {
+  Table,
+  Badge,
+  Button,
+  SkeletonCard,
+  SkeletonTable,
+  SkeletonChart,
+  ErrorState,
+} from "../../components/common";
 import StatCard from "../../components/dashboard/StatCard";
 import FilterBar from "../../components/dashboard/FilterBar";
 import DashboardCharts from "../../components/dashboard/DashboardCharts";
@@ -113,19 +121,10 @@ const Dashboard = () => {
             {lastUpdated ? `Last updated ${formatDateTime(lastUpdated)}` : "Loading latest data..."}
           </p>
         </div>
-        <button
-          type="button"
-          onClick={handleRefresh}
-          disabled={refreshing}
-          className="flex items-center gap-2 px-4 py-2 rounded-lg border border-border/10 text-text/70 hover:text-text hover:bg-border/5 transition-colors disabled:opacity-50"
-        >
-          <RefreshIcon
-            width={16}
-            height={16}
-            className={refreshing ? "animate-spin" : ""}
-          />
-          <span className="text-sm font-medium">Refresh</span>
-        </button>
+        <Button variant="neutral" loading={refreshing} onClick={handleRefresh} className="text-sm">
+          {!refreshing && <RefreshIcon width={16} height={16} />}
+          Refresh
+        </Button>
       </div>
 
       {statsError && !statsLoading ? (
@@ -134,11 +133,25 @@ const Dashboard = () => {
           onRetry={loadStats}
         />
       ) : statsLoading || !stats ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-          {Array.from({ length: 4 }).map((_, i) => (
-            <SkeletonCard key={i} />
-          ))}
-        </div>
+        <>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            {Array.from({ length: 7 }).map((_, i) => (
+              <SkeletonCard key={i} />
+            ))}
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+            <SkeletonChart />
+            <div className="lg:col-span-2">
+              <SkeletonChart />
+            </div>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+            <SkeletonChart title={false} />
+            <div className="lg:col-span-2">
+              <SkeletonChart title={false} />
+            </div>
+          </div>
+        </>
       ) : (
         <>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">

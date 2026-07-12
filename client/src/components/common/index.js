@@ -9,6 +9,7 @@ export { default as ProtectedRoute } from "./ProtectedRoute";
 export { default as RoleRoute } from "./RoleRoute";
 export { default as SkeletonCard } from "./SkeletonCard";
 export { default as SkeletonTable } from "./SkeletonTable";
+export { default as SkeletonChart } from "./SkeletonChart";
 export { default as Select } from "./Select";
 export { default as Badge } from "./Badge";
 export { default as Pagination } from "./Pagination";

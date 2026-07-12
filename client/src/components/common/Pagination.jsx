@@ -1,3 +1,5 @@
+import Button from "./Button";
+
 const Pagination = ({ page, totalPages, onPageChange }) => {
   if (totalPages <= 1) return null;
 
@@ -11,22 +13,17 @@ const Pagination = ({ page, totalPages, onPageChange }) => {
         Page {page} of {totalPages}
       </span>
       <div className="flex gap-2">
-        <button
-          type="button"
-          onClick={() => goTo(page - 1)}
-          disabled={page <= 1}
-          className="px-3 py-1.5 rounded-lg border border-border/10 hover:bg-border/5 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
-        >
+        <Button variant="neutral" className="px-3 py-1.5" onClick={() => goTo(page - 1)} disabled={page <= 1}>
           Previous
-        </button>
-        <button
-          type="button"
+        </Button>
+        <Button
+          variant="neutral"
+          className="px-3 py-1.5"
           onClick={() => goTo(page + 1)}
           disabled={page >= totalPages}
-          className="px-3 py-1.5 rounded-lg border border-border/10 hover:bg-border/5 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
         >
           Next
-        </button>
+        </Button>
       </div>
     </div>
   );

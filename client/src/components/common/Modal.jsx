@@ -8,7 +8,7 @@ const Modal = ({ isOpen, onClose, title, children, footer }) => {
           <h3 className="text-text font-semibold text-lg">{title}</h3>
           <button
             onClick={onClose}
-            className="text-text/60 hover:text-text transition-colors"
+            className="text-text/60 hover:text-text transition-colors rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
             aria-label="Close modal"
           >
             &times;

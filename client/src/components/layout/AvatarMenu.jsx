@@ -38,7 +38,7 @@ const AvatarMenu = () => {
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
         aria-label="Account menu"
-        className="h-9 w-9 rounded-full bg-primary text-white flex items-center justify-center text-sm font-semibold"
+        className="h-9 w-9 rounded-full bg-primary text-white flex items-center justify-center text-sm font-semibold transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
       >
         {getInitials(user?.name) || "?"}
       </button>
@@ -57,7 +57,7 @@ const AvatarMenu = () => {
                 setIsOpen(false);
                 navigate("/settings");
               }}
-              className="w-full flex items-center gap-2.5 text-left px-4 py-2.5 text-sm text-text hover:bg-border/5 transition-colors"
+              className="w-full flex items-center gap-2.5 text-left px-4 py-2.5 text-sm text-text hover:bg-border/5 transition-colors focus-visible:outline-none focus-visible:bg-border/5"
             >
               <UserIcon width={16} height={16} />
               Profile
@@ -65,7 +65,7 @@ const AvatarMenu = () => {
             <button
               type="button"
               onClick={handleLogout}
-              className="w-full flex items-center gap-2.5 text-left px-4 py-2.5 text-sm text-danger hover:bg-border/5 transition-colors"
+              className="w-full flex items-center gap-2.5 text-left px-4 py-2.5 text-sm text-danger hover:bg-border/5 transition-colors focus-visible:outline-none focus-visible:bg-border/5"
             >
               <LogOutIcon width={16} height={16} />
               Log out

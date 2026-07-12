@@ -1,9 +1,15 @@
 import { NavLink } from "react-router-dom";
 import { NAV_ITEMS } from "../../routes/routesConfig";
 import { classNames } from "../../utils/helpers";
+import { useAuth } from "../../hooks/useAuth";
 import { ChevronLeftIcon, ChevronRightIcon } from "./icons";
 
 const Sidebar = ({ isOpen = false, onClose, collapsed = false, onToggleCollapse }) => {
+  const { user } = useAuth();
+  const visibleItems = NAV_ITEMS.filter(
+    (item) => !item.allowedRoles || item.allowedRoles.includes(user?.role)
+  );
+
   return (
     <>
       {isOpen && (
@@ -43,7 +49,7 @@ const Sidebar = ({ isOpen = false, onClose, collapsed = false, onToggleCollapse 
         </div>
 
         <nav className="flex flex-col gap-1.5">
-          {NAV_ITEMS.map((item) => {
+          {visibleItems.map((item) => {
             const Icon = item.icon;
             return (
               <NavLink
@@ -56,6 +62,7 @@ const Sidebar = ({ isOpen = false, onClose, collapsed = false, onToggleCollapse 
                   classNames(
                     "group relative flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium",
                     "transition-all duration-150 hover:translate-x-0.5",
+                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40",
                     collapsed && "md:justify-center md:px-0",
                     isActive
                       ? "bg-primary text-white"
@@ -96,6 +103,7 @@ const Sidebar = ({ isOpen = false, onClose, collapsed = false, onToggleCollapse 
           className={classNames(
             "hidden md:flex items-center gap-2 mt-auto px-3 py-2.5 rounded-lg text-sm font-medium",
             "text-text/60 hover:bg-border/5 hover:text-text transition-colors",
+            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40",
             collapsed && "justify-center px-0"
           )}
         >

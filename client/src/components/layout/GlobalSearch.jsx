@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { NAV_ITEMS } from "../../routes/routesConfig";
+import { useAuth } from "../../hooks/useAuth";
 import { EmptyState } from "../common";
 
 const GlobalSearch = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -34,8 +36,10 @@ const GlobalSearch = () => {
 
   if (!isOpen) return null;
 
-  const results = NAV_ITEMS.filter((item) =>
-    item.label.toLowerCase().includes(query.toLowerCase())
+  const results = NAV_ITEMS.filter(
+    (item) =>
+      (!item.allowedRoles || item.allowedRoles.includes(user?.role)) &&
+      item.label.toLowerCase().includes(query.toLowerCase())
   );
 
   const goTo = (path) => {
@@ -67,7 +71,7 @@ const GlobalSearch = () => {
                 <button
                   type="button"
                   onClick={() => goTo(item.path)}
-                  className="w-full text-left px-4 py-3 text-text hover:bg-border/5 transition-colors"
+                  className="w-full text-left px-4 py-3 text-text hover:bg-border/5 transition-colors focus-visible:outline-none focus-visible:bg-border/5"
                 >
                   {item.label}
                 </button>

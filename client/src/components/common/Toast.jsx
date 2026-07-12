@@ -19,6 +19,7 @@ const Toast = () => {
           key={toast.id}
           className={classNames(
             "min-w-[240px] max-w-sm px-4 py-3 rounded-lg border text-text shadow-lg cursor-pointer",
+            "animate-toast-in hover:shadow-xl transition-shadow",
             TYPE_STYLES[toast.type] || TYPE_STYLES.info
           )}
           onClick={() => removeToast(toast.id)}

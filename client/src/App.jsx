@@ -4,6 +4,7 @@ import { AuthProvider } from "./context/AuthContext";
 import { ToastProvider } from "./context/ToastContext";
 import { NotificationProvider } from "./context/NotificationContext";
 import { Toast } from "./components/common";
+import RouteProgressBar from "./components/layout/RouteProgressBar";
 import AppRoutes from "./routes/AppRoutes";
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         <ToastProvider>
           <AuthProvider>
             <NotificationProvider>
+              <RouteProgressBar />
               <AppRoutes />
               <Toast />
             </NotificationProvider>

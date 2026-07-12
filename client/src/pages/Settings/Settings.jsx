@@ -48,7 +48,7 @@ const ProfileTab = () => {
           onChange={(e) => setForm((prev) => ({ ...prev, email: e.target.value }))}
           required
         />
-        <Button type="submit" disabled={loading} className="self-start">
+        <Button type="submit" loading={loading} className="self-start">
           {loading ? "Saving..." : "Save changes"}
         </Button>
       </form>
@@ -112,7 +112,7 @@ const ChangePasswordTab = () => {
           minLength={6}
           required
         />
-        <Button type="submit" disabled={loading} className="self-start">
+        <Button type="submit" loading={loading} className="self-start">
           {loading ? "Updating..." : "Update password"}
         </Button>
       </form>

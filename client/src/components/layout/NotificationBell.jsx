@@ -21,7 +21,7 @@ const NotificationBell = () => {
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
         aria-label="Notifications"
-        className="relative text-text/70 hover:text-text transition-colors text-lg leading-none"
+        className="relative text-text/70 hover:text-text transition-colors text-lg leading-none rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
       >
         🔔
         {unreadCount > 0 && (

@@ -25,7 +25,10 @@ const Breadcrumbs = () => {
 
   return (
     <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-sm text-text/60 mb-4">
-      <Link to="/" className="hover:text-text transition-colors">
+      <Link
+        to="/"
+        className="hover:text-text transition-colors rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+      >
         Dashboard
       </Link>
       {crumbs.map((crumb, index) => (
@@ -34,7 +37,10 @@ const Breadcrumbs = () => {
           {index === crumbs.length - 1 ? (
             <span className="text-text">{crumb.label}</span>
           ) : (
-            <Link to={crumb.path} className="hover:text-text transition-colors">
+            <Link
+              to={crumb.path}
+              className="hover:text-text transition-colors rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+            >
               {crumb.label}
             </Link>
           )}
