@@ -10,6 +10,18 @@
       rel="stylesheet"
     />
     <title>TransitOps - Smart Transport Operations Platform</title>
+    <script>
+      // Applies the persisted theme before React mounts so there is no
+      // flash of the wrong theme on load (dark is the default).
+      (function () {
+        try {
+          var theme = localStorage.getItem("transitops_theme");
+          document.documentElement.classList.add(theme === "light" ? "light" : "dark");
+        } catch (e) {
+          document.documentElement.classList.add("dark");
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

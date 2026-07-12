@@ -7,10 +7,12 @@ const {
   deleteTrip,
 } = require("../controllers/tripController");
 const { protect } = require("../middleware/authMiddleware");
+const { authorize } = require("../middleware/roleMiddleware");
 
 const router = express.Router();
 
 router.use(protect);
+router.use(authorize("fleet_manager", "dispatcher"));
 
 router.route("/").get(getTrips).post(createTrip);
 router.route("/:id").get(getTripById).put(updateTrip).delete(deleteTrip);

@@ -9,4 +9,6 @@ export const API_ENDPOINTS = {
   MAINTENANCE: "/maintenance",
   FUEL: "/fuel",
   REPORTS: "/reports",
+  DASHBOARD: "/dashboard",
+  NOTIFICATIONS: "/notifications",
 };

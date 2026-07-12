@@ -2,7 +2,7 @@ import { useToast } from "../../hooks/useToast";
 import { classNames } from "../../utils/helpers";
 
 const TYPE_STYLES = {
-  info: "bg-surface border-white/10",
+  info: "bg-surface border-border/10",
   success: "bg-surface border-success",
   danger: "bg-surface border-danger",
 };
@@ -18,7 +18,8 @@ const Toast = () => {
         <div
           key={toast.id}
           className={classNames(
-            "min-w-[240px] max-w-sm px-4 py-3 rounded-lg border text-white shadow-lg cursor-pointer",
+            "min-w-[240px] max-w-sm px-4 py-3 rounded-lg border text-text shadow-lg cursor-pointer",
+            "animate-toast-in hover:shadow-xl transition-shadow",
             TYPE_STYLES[toast.type] || TYPE_STYLES.info
           )}
           onClick={() => removeToast(toast.id)}
