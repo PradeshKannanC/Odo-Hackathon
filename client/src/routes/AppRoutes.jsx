@@ -32,28 +32,69 @@ const AppRoutes = () => {
             <Route path="/settings" element={<Settings />} />
             <Route path="/forbidden" element={<Forbidden />} />
 
-            <Route element={<RoleRoute allowedRoles={["fleet_manager", "dispatcher"]} />}>
+            <Route
+              element={
+                <RoleRoute
+                  allowedRoles={["fleet_manager", "dispatcher"]}
+                />
+              }
+            >
               <Route path="/vehicles" element={<Vehicles />} />
               <Route path="/trips" element={<Trips />} />
             </Route>
 
             <Route
-              element={<RoleRoute allowedRoles={["fleet_manager", "dispatcher", "safety_officer"]} />}
+              element={
+                <RoleRoute
+                  allowedRoles={[
+                    "fleet_manager",
+                    "dispatcher",
+                    "safety_officer",
+                  ]}
+                />
+              }
             >
               <Route path="/drivers" element={<Drivers />} />
             </Route>
 
-            <Route element={<RoleRoute allowedRoles={["fleet_manager", "safety_officer"]} />}>
-              <Route path="/maintenance" element={<Maintenance />} />
+            <Route
+              element={
+                <RoleRoute
+                  allowedRoles={[
+                    "fleet_manager",
+                    "safety_officer",
+                  ]}
+                />
+              }
+            >
+              <Route
+                path="/maintenance"
+                element={<Maintenance />}
+              />
             </Route>
 
-            <Route element={<RoleRoute allowedRoles={["fleet_manager", "financial_analyst"]} />}>
+            <Route
+              element={
+                <RoleRoute
+                  allowedRoles={[
+                    "fleet_manager",
+                    "financial_analyst",
+                  ]}
+                />
+              }
+            >
               <Route path="/fuel" element={<Fuel />} />
             </Route>
 
             <Route
               element={
-                <RoleRoute allowedRoles={["fleet_manager", "safety_officer", "financial_analyst"]} />
+                <RoleRoute
+                  allowedRoles={[
+                    "fleet_manager",
+                    "safety_officer",
+                    "financial_analyst",
+                  ]}
+                />
               }
             >
               <Route path="/reports" element={<Reports />} />
