@@ -1,28 +1,29 @@
 const mongoose = require("mongoose");
 
-// Placeholder schema - fields to be expanded further when the Fuel module is
-// implemented. vehicle ref + liters/cost/date/odometer added to support
-// realistic seed data.
 const fuelLogSchema = new mongoose.Schema(
   {
     vehicle: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Vehicle",
+      required: [true, "Vehicle is required"],
     },
     liters: {
       type: Number,
-      min: 0,
+      required: [true, "Liters is required"],
+      min: [0, "Liters cannot be negative"],
     },
     cost: {
       type: Number,
-      min: 0,
+      required: [true, "Cost is required"],
+      min: [0, "Cost cannot be negative"],
     },
     odometerReading: {
       type: Number,
-      min: 0,
+      min: [0, "Odometer reading cannot be negative"],
     },
     date: {
       type: Date,
+      required: [true, "Date is required"],
     },
   },
   { timestamps: true }

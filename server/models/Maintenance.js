@@ -1,24 +1,25 @@
 const mongoose = require("mongoose");
 
-// Placeholder schema - fields to be expanded further when the Maintenance
-// module is implemented. vehicle ref + type/cost/date added to support
-// realistic seed data.
 const maintenanceSchema = new mongoose.Schema(
   {
     vehicle: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Vehicle",
+      required: [true, "Vehicle is required"],
     },
     type: {
       type: String,
+      required: [true, "Maintenance type is required"],
       trim: true,
     },
     cost: {
       type: Number,
-      min: 0,
+      required: [true, "Cost is required"],
+      min: [0, "Cost cannot be negative"],
     },
     date: {
       type: Date,
+      required: [true, "Date is required"],
     },
     notes: {
       type: String,

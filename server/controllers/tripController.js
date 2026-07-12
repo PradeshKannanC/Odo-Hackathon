@@ -4,8 +4,9 @@ const Trip = require("../models/Trip");
 // GET /api/trips
 const getTrips = asyncHandler(async (req, res) => {
     const trips = await Trip.find()
-        .populate("vehicleId")
-        .populate("driverId");
+        .populate("vehicle")
+        .populate("driver")
+        .sort({ createdAt: -1 });
 
     res.status(200).json({
         success: true,
@@ -17,8 +18,8 @@ const getTrips = asyncHandler(async (req, res) => {
 // GET /api/trips/:id
 const getTripById = asyncHandler(async (req, res) => {
     const trip = await Trip.findById(req.params.id)
-        .populate("vehicleId")
-        .populate("driverId");
+        .populate("vehicle")
+        .populate("driver");
 
     if (!trip) {
         return res.status(404).json({
