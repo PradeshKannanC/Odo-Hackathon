@@ -1,15 +1,58 @@
 const mongoose = require("mongoose");
 
-// Placeholder schema - fields to be expanded when Driver CRUD is implemented
 const driverSchema = new mongoose.Schema(
   {
+    name: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+
+    licenseNo: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+    },
+
+    licenseCategory: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+
+    expiryDate: {
+      type: Date,
+      required: true,
+    },
+
+    phone: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+
+    safetyScore: {
+      type: Number,
+      default: 100,
+      min: 0,
+      max: 100,
+    },
+
     status: {
       type: String,
-      enum: ["AVAILABLE", "ON_TRIP", "OFF_DUTY", "SUSPENDED"],
+      enum: [
+        "AVAILABLE",
+        "ON_TRIP",
+        "OFF_DUTY",
+        "SUSPENDED",
+      ],
       default: "AVAILABLE",
     },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+  }
 );
 
 module.exports = mongoose.model("Driver", driverSchema);
