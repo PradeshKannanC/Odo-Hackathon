@@ -1,143 +1,221 @@
-# TransitOps – Smart Transport Operations Platform
+# 🚛 TransitOps – Smart Transport Operations Platform
 
-A production-style MERN stack starter for managing transport operations: vehicles, drivers, trips, maintenance, fuel and reports.
+A full-stack MERN (MongoDB, Express.js, React, Node.js) based Fleet Management System developed for managing transport operations efficiently. The platform provides secure authentication, role-based access control (RBAC), and modules for vehicles, drivers, trips, maintenance, fuel management, reports, and dashboard analytics.
 
-This repository currently contains the **project skeleton only** — folder structure, routing, authentication, and shared UI components. Business logic (CRUD for vehicles/drivers/trips/maintenance/fuel, dashboard analytics, reports) is intentionally left unimplemented and will be added in later steps.
+---
 
-## Tech Stack
+## 🛠 Tech Stack
 
 **Frontend:** React (Vite), Tailwind CSS, React Router DOM, Axios, Chart.js
+
 **Backend:** Node.js, Express.js
+
 **Database:** MongoDB, Mongoose
+
 **Authentication:** JWT, bcrypt
 
-## Folder Structure
+---
 
-```
+## 📂 Folder Structure
+
+```text
 TransitOps/
-├── client/                    # React frontend (Vite)
+├── client/
 │   └── src/
-│       ├── assets/            # Static assets (images, icons)
+│       ├── assets/
 │       ├── components/
-│       │   ├── common/        # Button, Input, Card, Table, Loader, Modal, Toast, ProtectedRoute
-│       │   └── layout/        # Sidebar, Navbar
-│       ├── layouts/           # MainLayout, AuthLayout
-│       ├── pages/             # Dashboard, Vehicles, Drivers, Trips, Maintenance, Fuel, Reports, Settings, Auth
-│       ├── services/          # Axios instance + one service file per API resource
-│       ├── hooks/             # useAuth, useToast
-│       ├── context/           # AuthContext, ToastContext
-│       ├── constants/         # status enums, theme colors, API endpoints
-│       ├── utils/             # formatDate, validators, helpers
-│       ├── routes/            # AppRoutes, routesConfig (sidebar nav)
-│       ├── styles/            # Tailwind entrypoint
+│       ├── layouts/
+│       ├── pages/
+│       ├── services/
+│       ├── hooks/
+│       ├── context/
+│       ├── constants/
+│       ├── utils/
+│       ├── routes/
+│       ├── styles/
 │       ├── App.jsx
 │       └── main.jsx
 │
-├── server/                    # Express backend
-│   ├── config/                 # env.js, db.js (MongoDB connection)
-│   ├── controllers/            # authController is functional; others are stubs
-│   ├── middleware/             # authMiddleware (JWT), roleMiddleware, errorMiddleware
-│   ├── models/                 # User (full schema), other collections (placeholder schemas)
-│   ├── routes/                 # one router per resource, mounted under /api
-│   ├── utils/                  # generateToken, asyncHandler
-│   ├── uploads/                # file upload target (gitignored contents)
-│   └── server.js               # Express app entrypoint
+├── server/
+│   ├── config/
+│   ├── controllers/
+│   ├── middleware/
+│   ├── models/
+│   ├── routes/
+│   ├── utils/
+│   ├── uploads/
+│   └── server.js
 │
 ├── .gitignore
-├── package.json                # root scripts to run client + server together
+├── package.json
 └── README.md
 ```
 
-## Database Collections
+---
 
-`users`, `vehicles`, `drivers`, `trips`, `maintenances`, `fuelLogs`, `expenses`
+## 🗄 Database Collections
 
-## Status Enums
+- users
+- vehicles
+- drivers
+- trips
+- maintenances
+- fuelLogs
+- expenses
+
+---
+
+## 📌 Status Enums
 
 | Entity | Values |
-|---|---|
-| Vehicle | `AVAILABLE`, `ON_TRIP`, `IN_SHOP`, `RETIRED` |
-| Driver | `AVAILABLE`, `ON_TRIP`, `OFF_DUTY`, `SUSPENDED` |
-| Trip | `DRAFT`, `DISPATCHED`, `COMPLETED`, `CANCELLED` |
-| Maintenance | `ACTIVE`, `COMPLETED` |
+|----------|--------------------------------|
+| Vehicle | AVAILABLE, ON_TRIP, IN_SHOP, RETIRED |
+| Driver | AVAILABLE, ON_TRIP, OFF_DUTY, SUSPENDED |
+| Trip | DRAFT, DISPATCHED, COMPLETED, CANCELLED |
+| Maintenance | ACTIVE, COMPLETED |
 
-## API Routes
+---
 
-| Base path | Status |
-|---|---|
-| `/api/auth` | Functional (register, login, logout, me) |
-| `/api/users` | Stub |
-| `/api/vehicles` | Stub |
-| `/api/drivers` | Stub |
-| `/api/trips` | Stub |
-| `/api/maintenance` | Stub |
-| `/api/fuel` | Stub |
-| `/api/reports` | Stub |
+## 🌐 API Routes
 
-Stub endpoints return `501 Not Implemented` until their business logic is built.
+| Endpoint | Description |
+|-----------|-------------|
+| `/api/auth` | Authentication APIs |
+| `/api/users` | User Management |
+| `/api/vehicles` | Vehicle Management |
+| `/api/drivers` | Driver Management |
+| `/api/trips` | Trip Management |
+| `/api/maintenance` | Maintenance Management |
+| `/api/fuel` | Fuel Management |
+| `/api/reports` | Reports |
 
-## UI Theme
+---
+
+## 🎨 UI Theme
 
 | Token | Value |
-|---|---|
-| Background | `#111827` |
-| Card / Surface | `#1F2937` |
-| Primary | `#D18A00` |
-| Success | `#22C55E` |
-| Danger | `#EF4444` |
+|--------|---------|
+| Background | #111827 |
+| Surface | #1F2937 |
+| Primary | #D18A00 |
+| Success | #22C55E |
+| Danger | #EF4444 |
 | Text | White |
 | Font | Poppins |
 
-## Getting Started
+---
 
-### 1. Install dependencies
+# 🚀 Getting Started
+
+## 1. Install Dependencies
 
 ```bash
-npm run install:all
+npm install
 ```
 
-(or manually: `npm install --prefix client` and `npm install --prefix server`)
-
-### 2. Configure environment variables
-
-Copy the example env files and fill in your own values:
+or
 
 ```bash
-cp server/.env.example server/.env
-cp client/.env.example client/.env
+npm install --prefix client
+npm install --prefix server
 ```
 
-`server/.env` requires `MONGO_URI` and `JWT_SECRET` at minimum.
+---
 
-### 3. Run the app
+## 2. Configure Environment Variables
 
-From the repository root, run both client and server together:
+### Backend (.env)
+
+```env
+PORT=5000
+
+MONGO_URI=<your_mongodb_connection_string>
+
+JWT_SECRET=<your_secure_jwt_secret>
+
+CLIENT_URL=http://localhost:5173
+```
+
+### Frontend (.env)
+
+```env
+VITE_API_BASE_URL=http://localhost:5000/api
+```
+
+---
+
+## 3. Start the Application
+
+Run backend
 
 ```bash
+cd server
 npm run dev
 ```
 
-Or run them individually:
+Run frontend
 
 ```bash
-npm run dev:server   # http://localhost:5000
-npm run dev:client   # http://localhost:5173
+cd client
+npm run dev
 ```
 
-### 4. Verify
+---
 
-- Backend health check: `GET http://localhost:5000/api/health`
-- Frontend: open `http://localhost:5173` — you'll be redirected to `/login` since routes are protected by `ProtectedRoute`. Register a new account to get in.
+## 🔐 Demo Login Credentials
 
-## Next Steps
+Use one of the following demo accounts.
 
-This skeleton intentionally excludes:
+| Role | Email | Password |
+|------|-----------------------------|-------------|
+| Fleet Manager | fleetmanager@transitops.com | password123 |
+| Dispatcher | dispatcher@transitops.com | password123 |
+| Safety Officer | safety@transitops.com | password123 |
+| Financial Analyst | finance@transitops.com | password123 |
 
-- Vehicle CRUD
-- Driver CRUD
-- Trip CRUD
-- Maintenance & Fuel logic
-- Reports & analytics
-- Dashboard charts/logic
+> **Note:** These accounts are intended for demonstration purposes only.
 
-These will be implemented incrementally on top of this foundation.
+---
+
+## ✅ Verify
+
+- Backend Health Check
+
+```
+GET http://localhost:5000/api/health
+```
+
+- Frontend
+
+Open
+
+```
+http://localhost:5173
+```
+
+You will be redirected to the Login page.
+
+Sign in using any of the demo accounts listed above.
+
+---
+
+## ✨ Features
+
+- JWT Authentication
+- Role Based Access Control (RBAC)
+- Dashboard Analytics
+- Vehicle Management
+- Driver Management
+- Trip Management
+- Maintenance Management
+- Fuel Management
+- Reports
+- Responsive UI
+- MongoDB Integration
+- RESTful APIs
+
+---
+
+## 📄 License
+
+This project was developed for educational and hackathon purposes.
