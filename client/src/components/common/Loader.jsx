@@ -1,6 +1,6 @@
 const Loader = ({ fullScreen = false }) => {
   const spinner = (
-    <div className="h-10 w-10 rounded-full border-4 border-white/10 border-t-primary animate-spin" />
+    <div className="h-10 w-10 rounded-full border-4 border-border/10 border-t-primary animate-spin" />
   );
 
   if (fullScreen) {

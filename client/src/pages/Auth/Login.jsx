@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { useToast } from "../../hooks/useToast";
 import { Button, Input, Card } from "../../components/common";
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
+  const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
   const { showToast } = useToast();
@@ -19,11 +20,14 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      await login(formData);
+      await login({ ...formData, rememberMe });
       showToast("Logged in successfully", "success");
       navigate("/");
     } catch (error) {
-      showToast(error.response?.data?.message || "Login failed", "danger");
+      const message = error.response
+        ? error.response.data?.message || "Login failed. Please check your details and try again."
+        : "Unable to reach the server. Please check your connection and try again.";
+      showToast(message, "danger");
     } finally {
       setLoading(false);
     }
@@ -51,16 +55,19 @@ const Login = () => {
             onChange={handleChange}
             required
           />
+          <label className="flex items-center gap-2 text-sm text-text/70 cursor-pointer select-none">
+            <input
+              type="checkbox"
+              checked={rememberMe}
+              onChange={(e) => setRememberMe(e.target.checked)}
+              className="accent-primary"
+            />
+            Remember me
+          </label>
           <Button type="submit" disabled={loading} className="w-full">
             {loading ? "Signing in..." : "Sign in"}
           </Button>
         </form>
-        <p className="text-sm text-white/60 mt-4 text-center">
-          Don&apos;t have an account?{" "}
-          <Link to="/register" className="text-primary hover:underline">
-            Register
-          </Link>
-        </p>
       </Card>
     </div>
   );

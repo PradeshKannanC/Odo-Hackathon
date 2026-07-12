@@ -12,7 +12,8 @@ import Fuel from "../pages/Fuel/Fuel";
 import Reports from "../pages/Reports/Reports";
 import Settings from "../pages/Settings/Settings";
 import Login from "../pages/Auth/Login";
-import Register from "../pages/Auth/Register";
+import Unauthorized from "../pages/Unauthorized";
+import Forbidden from "../pages/Forbidden";
 import NotFound from "../pages/NotFound";
 
 const AppRoutes = () => {
@@ -20,7 +21,7 @@ const AppRoutes = () => {
     <Routes>
       <Route element={<AuthLayout />}>
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/unauthorized" element={<Unauthorized />} />
       </Route>
 
       <Route element={<ProtectedRoute />}>
@@ -33,6 +34,7 @@ const AppRoutes = () => {
           <Route path="/fuel" element={<Fuel />} />
           <Route path="/reports" element={<Reports />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/forbidden" element={<Forbidden />} />
         </Route>
       </Route>
 
