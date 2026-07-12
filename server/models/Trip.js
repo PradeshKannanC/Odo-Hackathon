@@ -1,39 +1,62 @@
 const mongoose = require("mongoose");
 
-// Placeholder schema - fields to be expanded further when Trip CRUD is implemented.
-// vehicle/driver refs + origin/destination/distance added to support realistic seed data.
 const tripSchema = new mongoose.Schema(
   {
-    vehicle: {
+    tripId: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+    },
+
+    vehicleId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Vehicle",
+      required: true,
     },
-    driver: {
+
+    driverId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Driver",
+      required: true,
     },
-    origin: {
+
+    source: {
       type: String,
+      required: true,
       trim: true,
     },
+
     destination: {
       type: String,
+      required: true,
       trim: true,
     },
-    distanceKm: {
+
+    cargoWeight: {
       type: Number,
-      min: 0,
+      required: true,
     },
-    scheduledDate: {
-      type: Date,
+
+    plannedDistance: {
+      type: Number,
+      required: true,
     },
+
     status: {
       type: String,
-      enum: ["DRAFT", "DISPATCHED", "COMPLETED", "CANCELLED"],
+      enum: [
+        "DRAFT",
+        "DISPATCHED",
+        "COMPLETED",
+        "CANCELLED",
+      ],
       default: "DRAFT",
     },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+  }
 );
 
 module.exports = mongoose.model("Trip", tripSchema);
