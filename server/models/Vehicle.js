@@ -1,34 +1,52 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-// Placeholder schema - fields to be expanded further when Vehicle CRUD is implemented.
-// registrationNumber/type/model/region added to support realistic seed data.
-const vehicleSchema = new mongoose.Schema(
+const VehicleSchema = new mongoose.Schema(
   {
-    registrationNumber: {
+    registrationNo: {
       type: String,
+      required: [true, 'Registration number is required'],
       unique: true,
-      sparse: true,
+      trim: true,
+      uppercase: true,
+    },
+    vehicleName: {
+      type: String,
+      required: [true, 'Vehicle name is required'],
       trim: true,
     },
-    type: {
+    vehicleType: {
       type: String,
+      required: [true, 'Vehicle type is required'],
       trim: true,
     },
-    model: {
-      type: String,
-      trim: true,
+    capacity: {
+      type: Number,
+      required: [true, 'Capacity is required'],
+      min: [1, 'Capacity must be greater than 0'],
     },
-    region: {
-      type: String,
-      trim: true,
+    odometer: {
+      type: Number,
+      required: true,
+      default: 0,
+      min: [0, 'Odometer cannot be negative'],
+    },
+    acquisitionCost: {
+      type: Number,
+      required: [true, 'Acquisition cost is required'],
+      min: [0, 'Acquisition cost cannot be negative'],
     },
     status: {
       type: String,
-      enum: ["AVAILABLE", "ON_TRIP", "IN_SHOP", "RETIRED"],
-      default: "AVAILABLE",
+      enum: ['AVAILABLE', 'ON_TRIP', 'IN_SHOP', 'RETIRED'],
+      default: 'AVAILABLE',
     },
   },
-  { timestamps: true }
+  {
+    timestamps: true, // adds createdAt / updatedAt automatically
+  }
 );
 
-module.exports = mongoose.model("Vehicle", vehicleSchema);
+// Index for faster search/filter
+VehicleSchema.index({ vehicleName: 'text', vehicleType: 'text' });
+
+module.exports = mongoose.model('Vehicle', VehicleSchema);
